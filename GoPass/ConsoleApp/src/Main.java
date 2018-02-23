@@ -1,6 +1,7 @@
 package src;
 
 import java.util.Scanner;
+import static src.Generator.generatePassword;
 
 public class Main {
 
@@ -9,6 +10,7 @@ public class Main {
         // Declare variables to be used for storage.
         String username;
         String full_name;
+        String password;
         Scanner scanner = new Scanner(System.in);
 
         // Print welcome message and prompt for username and full name.
@@ -28,8 +30,12 @@ public class Main {
         full_name = scanner.nextLine();
         System.out.println();
 
+        // Generate the password and store it.
+        password = generatePassword();
+
         // Test code that prints the username and name back on the console.
         System.out.println("Your username is: " + username);
         System.out.println("Your name is: " + full_name);
+        System.out.println("Your password is " + password);
     }
 }
