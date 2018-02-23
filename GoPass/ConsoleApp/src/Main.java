@@ -14,7 +14,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Print welcome message and prompt for username and full name.
-        System.out.println("Welcome to GoPass!");
+        System.out.println("**************************************");
+        System.out.println("********* Welcome to GoPass! *********");
+        System.out.println("**************************************");
         System.out.println();
         System.out.println("GoPass generates strong passwords so you don't have to!");
         System.out.println("+ 8 characters in length");
@@ -31,7 +33,7 @@ public class Main {
         System.out.println();
 
         // Generate the password and store it.
-        password = generatePassword();
+        password = generatePassword(username, full_name);
 
         // Test code that prints the username and name back on the console.
         System.out.println("Your username is: " + username);
