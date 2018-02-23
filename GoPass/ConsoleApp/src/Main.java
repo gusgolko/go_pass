@@ -9,7 +9,8 @@ public class Main {
 
         // Declare variables to be used for storage.
         String username;
-        String full_name;
+        String f_name;
+        String l_name;
         String password;
         Scanner scanner = new Scanner(System.in);
 
@@ -28,16 +29,19 @@ public class Main {
         System.out.print("Input your username to get started: ");
         username = scanner.nextLine();
         System.out.println();
-        System.out.print("Input your name and surname: ");
-        full_name = scanner.nextLine();
+        System.out.print("Input your first name: ");
+        f_name = scanner.nextLine();
+        System.out.println();
+        System.out.print("Input your last name: ");
+        l_name = scanner.nextLine();
         System.out.println();
 
         // Generate the password and store it.
-        password = generatePassword(username, full_name);
+        password = generatePassword(username, f_name, l_name);
 
         // Test code that prints the username and name back on the console.
         System.out.println("Your username is: " + username);
-        System.out.println("Your name is: " + full_name);
+        System.out.println("Your name is: " + f_name + " " + l_name);
         System.out.println("Your password is " + password);
     }
 }

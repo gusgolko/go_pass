@@ -22,10 +22,11 @@ public class Generator {
     /**
      * This class keeps track of the strings to avoid and generates the password.
      * @param username can't be part of the password
-     * @param full_name can't be part of the password either
+     * @param f_name can't be part of the password either
+     * @param l_name can't be part of the password either
      * @return
      */
-    public static String generatePassword(String username, String full_name) {
+    public static String generatePassword(String username, String f_name, String l_name) {
 
         // This is the string where we'll store the generated password.
         String pass = "";
@@ -36,10 +37,18 @@ public class Generator {
          * Then, we generate a random index and concatenate the character
          * at the index to the final password.
          */
-        for(int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             int current = random_int.nextInt(characters.length);
             int index = random_int.nextInt(characters[current].length());
             pass += characters[current].charAt(index);
+        }
+
+        /* Check if any of the names are contained in the random password
+         * to avoid making it vulnerable accidentally.
+         */
+        if (pass.contains(username) || pass.contains(f_name) || pass.contains(l_name)) {
+            // Recursive call to generate a new random password.
+            pass = generatePassword(username, f_name, l_name);
         }
 
         return pass;
