@@ -58,9 +58,10 @@ public class Generator {
         if (Arrays.asList(pass).contains(username) || Arrays.asList(pass).contains(f_name) ||
                 Arrays.asList(pass).contains(l_name)) {
             // Recursive call to generate a new random password.
-            pass = generatePassword(username, f_name, l_name);
+            password = generatePassword(username, f_name, l_name);
         }
 
+        password = pass.toString();
         return password;
 
     }
