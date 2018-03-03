@@ -80,16 +80,8 @@ public class Generator {
             password = generatePassword(username, f_name, l_name);
         }
 
-        // New StringBuilder we'll use to convert the ArrayList to a string.
-        StringBuilder builder = new StringBuilder(shuffled.size());
-
-        // Append all the shuffled characters
-        for(Character c : shuffled) {
-            builder.append(c);
-        }
-
-        // Convert the result to string.
-        password = builder.toString();
+        // Convert the shuffled characters to a string.
+        password = arrListToString(shuffled);
 
         // Return the password.
         return password;
@@ -145,5 +137,31 @@ public class Generator {
 
         // Return the shuffled list.
         return (ArrayList) shuffled;
+    }
+
+    /**
+     * This method takes in a character ArrayList and converts it
+     * to a string.
+     * @param inputArrList character ArrayList to convert to string
+     * @return resulting_string the resulting string
+     */
+    public static String arrListToString(ArrayList<Character> inputArrList) {
+
+        // This is where we'll store our return string.
+        String resulting_string;
+
+        // New StringBuilder we'll use to convert the ArrayList to a string.
+        StringBuilder builder = new StringBuilder(inputArrList.size());
+
+        // Append all the shuffled characters
+        for(Character c : inputArrList) {
+            builder.append(c);
+        }
+
+        // Convert the result to string.
+        resulting_string = builder.toString();
+
+        // Return the result.
+        return resulting_string;
     }
 }
