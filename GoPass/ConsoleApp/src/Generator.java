@@ -3,7 +3,6 @@ package src;
 import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,7 +44,9 @@ public class Generator {
         // This is the character array where we'll store the generated password.
         char[] pass = new char[8];
         // This is the String we'll return.
-        String password = "";
+        String password;
+        // We'll store the shuffled array here.
+        ArrayList<Character> shuffled;
 
         /* We loop 4 times for a random character from each
          * array. Then, we generate a random index and add
@@ -67,45 +68,30 @@ public class Generator {
             pass[i] =  allChars[index];
         }
 
-        System.out.println();
-        System.out.print("before shuffling: ");
-        for(int j=0; j<8; j++) {
-            System.out.print(pass[j]);
-        }
-        System.out.println();
-
-        // Shuffle the array randomly.
-        List<Character> result = new ArrayList<Character>();
-
-        // Add the characters to the ArrayList.
-        for(char c : pass) {
-            result.add(c);
-        }
-
-        // Shuffle the ArrayList.
-        Collections.shuffle(result, random_int);
+        // Shuffle the array and convert it to an ArrayList.
+        shuffled = shuffle(pass);
 
         /* Check if any of the names are contained in the random password
          * to avoid making it vulnerable accidentally.
          */
-        if (Arrays.asList(pass).contains(username) || Arrays.asList(pass).contains(f_name) ||
-                Arrays.asList(pass).contains(l_name)) {
+        if (shuffled.contains(username) || shuffled.contains(f_name) ||
+                shuffled.contains(l_name)) {
             // Recursive call to generate a new random password.
             password = generatePassword(username, f_name, l_name);
         }
 
-        StringBuilder builder = new StringBuilder(result.size());
+        // New StringBuilder we'll use to convert the ArrayList to a string.
+        StringBuilder builder = new StringBuilder(shuffled.size());
 
-        for(Character c : result) {
+        // Append all the shuffled characters
+        for(Character c : shuffled) {
             builder.append(c);
         }
 
-        /*for (int i = 0; i < pass.length; i++) {
-            password += String.valueOf(pass[i]);
-        }*/
-
+        // Convert the result to string.
         password = builder.toString();
 
+        // Return the password.
         return password;
 
     }
@@ -140,26 +126,24 @@ public class Generator {
     }
 
     /**
-     * This method takes in a character array as an argument and
-     * shuffles is using SecureRandom. It then returns the shuffled array.
+     * This method takes a character array and returns a shuffled ArrayList.
      * @param unshuffled the array to be shuffled
-     * @return shuffled the shuffled array
-     *//*
-    public static char[] shuffle(char[] unshuffled) {
+     * @return shuffled the shuffled list
+     */
+    public static ArrayList shuffle(char[] unshuffled) {
 
-        // This is the character array where we'll store the shuffled array.
-        char[] shuffled = new char[8];*/
+        // Create a new ArrayList.
+        List<Character> shuffled = new ArrayList<Character>();
 
-        /* Loop 8 times for each character of the array.
-         * Generate a random number and access the character
-         * at that index. Assign that character to the return array.
-         *//*
-        for(int i = 0; i < 8; i++) {
-            int index = random_int.nextInt(unshuffled.length);
-            shuffled[i] = unshuffled[index];
+        // Add the characters to the ArrayList.
+        for (char c : unshuffled) {
+            shuffled.add(c);
         }
 
-        // Return the shuffled array.
-        return shuffled;
-    }*/
+        // Shuffle the ArrayList using the SecureRandom seed.
+        Collections.shuffle(shuffled, random_int);
+
+        // Return the shuffled list.
+        return (ArrayList) shuffled;
+    }
 }
