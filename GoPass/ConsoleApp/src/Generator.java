@@ -42,7 +42,7 @@ public class Generator {
         // This is the character array where we'll store the generated password.
         char[] pass = new char[8];
         // This is the String we'll return.
-        String password;
+        String password = "";
 
         /* We loop 4 times for a random character from each
          * array. Then, we generate a random index and add
@@ -58,9 +58,8 @@ public class Generator {
 
         // Select 4 more characters at random.
         for (int i = 4; i < 8; i++) {
-            int current = random_int.nextInt(characters.length);
-            int index = random_int.nextInt(characters[current].length);
-            pass[i] =  characters[current][index];
+            int index = random_int.nextInt(allChars.length);
+            pass[i] =  allChars[index];
         }
 
         /* Check if any of the names are contained in the random password
@@ -72,7 +71,10 @@ public class Generator {
             password = generatePassword(username, f_name, l_name);
         }
 
-        password = pass.toString();
+        for (int i = 0; i < pass.length; i++) {
+            password += String.valueOf(pass[i]);
+        }
+
         return password;
 
     }
