@@ -39,9 +39,7 @@ public class Main {
         // Generate the password and store it.
         password = generatePassword(username, f_name, l_name);
 
-        // Test code that prints the username and name back on the console.
-        System.out.println("Your username is: " + username);
-        System.out.println("Your name is: " + f_name + " " + l_name);
+        // Print the generated password.
         System.out.println("Your password is " + password);
     }
 }
