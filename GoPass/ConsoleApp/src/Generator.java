@@ -27,8 +27,8 @@ public class Generator {
     // We'll use this to select a random list.
     private static char[][] characters = {UPPERCASE, LOWERCASE, NUMBERS, SYMBOLS};
 
-    // We'll use this array to join all arrays.
-    private static char[] allChars;
+    // We'll use these arrays to join all arrays.
+    private static char[] allChars, letters, symbols;
 
     /**
      * This class keeps track of the strings to avoid and generates the password.
@@ -53,8 +53,10 @@ public class Generator {
             pass[i] =  characters[i][index];
         }
 
-        // Join the arrays to select 4 more characters.
-        allChars = joinArrays(UPPERCASE, LOWERCASE, NUMBERS, SYMBOLS);
+        // Join the arrays to select 4 more characters by joining them 2 by 2.
+        letters = joinArrays(UPPERCASE, LOWERCASE);
+        symbols = joinArrays(NUMBERS, SYMBOLS);
+        allChars = joinArrays(letters, symbols);
 
         // Select 4 more characters at random.
         for (int i = 4; i < 8; i++) {
@@ -83,33 +85,28 @@ public class Generator {
      * This class concatenates our character arrays.
      * @param first the first array
      * @param second the second array
-     * @param third the third array
-     * @param fourth the fourth array
      * @return joined the joined arrays
      */
-    public static char[] joinArrays(char[] first, char[] second,
-                                        char[] third, char[] fourth) {
+    public static char[] joinArrays(char[] first, char[] second) {
 
         // Get the lengths of the arrays to join.
         int first_len = first.length;
         int second_len = second.length;
-        int third_len = third.length;
-        int fourth_len = fourth.length;
 
         /* Create an array of the same type and with the combined length
          * of the input arrays. We assumed they're all of the same type.
          */
         @SuppressWarnings("unchecked")
         char[] joined = (char[]) Array.newInstance(first.getClass().getComponentType(),
-                first_len + second_len + third_len + fourth_len);
+                first_len + second_len);
 
         // Copy the arrays into the return array using arraycopy().
         System.arraycopy(first, 0, joined, 0, first_len);
         System.arraycopy(second, 0, joined, first_len, second_len);
-        System.arraycopy(third, 0, joined, second_len, third_len);
-        System.arraycopy(fourth, 0, joined, third_len, fourth_len);
 
         // Return the joined array.
         return joined;
+
+
     }
 }
