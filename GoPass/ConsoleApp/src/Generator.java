@@ -2,7 +2,10 @@ package src;
 
 import java.lang.reflect.Array;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class contains the logic for the strong password generation.
@@ -64,6 +67,24 @@ public class Generator {
             pass[i] =  allChars[index];
         }
 
+        System.out.println();
+        System.out.print("before shuffling: ");
+        for(int j=0; j<8; j++) {
+            System.out.print(pass[j]);
+        }
+        System.out.println();
+
+        // Shuffle the array randomly.
+        List<Character> result = new ArrayList<Character>();
+
+        // Add the characters to the ArrayList.
+        for(char c : pass) {
+            result.add(c);
+        }
+
+        // Shuffle the ArrayList.
+        Collections.shuffle(result, random_int);
+
         /* Check if any of the names are contained in the random password
          * to avoid making it vulnerable accidentally.
          */
@@ -73,9 +94,17 @@ public class Generator {
             password = generatePassword(username, f_name, l_name);
         }
 
-        for (int i = 0; i < pass.length; i++) {
-            password += String.valueOf(pass[i]);
+        StringBuilder builder = new StringBuilder(result.size());
+
+        for(Character c : result) {
+            builder.append(c);
         }
+
+        /*for (int i = 0; i < pass.length; i++) {
+            password += String.valueOf(pass[i]);
+        }*/
+
+        password = builder.toString();
 
         return password;
 
@@ -109,4 +138,28 @@ public class Generator {
 
 
     }
+
+    /**
+     * This method takes in a character array as an argument and
+     * shuffles is using SecureRandom. It then returns the shuffled array.
+     * @param unshuffled the array to be shuffled
+     * @return shuffled the shuffled array
+     *//*
+    public static char[] shuffle(char[] unshuffled) {
+
+        // This is the character array where we'll store the shuffled array.
+        char[] shuffled = new char[8];*/
+
+        /* Loop 8 times for each character of the array.
+         * Generate a random number and access the character
+         * at that index. Assign that character to the return array.
+         *//*
+        for(int i = 0; i < 8; i++) {
+            int index = random_int.nextInt(unshuffled.length);
+            shuffled[i] = unshuffled[index];
+        }
+
+        // Return the shuffled array.
+        return shuffled;
+    }*/
 }
