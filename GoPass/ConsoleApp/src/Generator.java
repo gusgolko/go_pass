@@ -1,5 +1,6 @@
 package src;
 
+import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -26,12 +27,15 @@ public class Generator {
     // We'll use this to select a random list.
     private static char[][] characters = {UPPERCASE, LOWERCASE, NUMBERS, SYMBOLS};
 
+    // We'll use this array to join all arrays.
+    private static char[] allChars;
+
     /**
      * This class keeps track of the strings to avoid and generates the password.
      * @param username can't be part of the password
      * @param f_name can't be part of the password either
      * @param l_name can't be part of the password either
-     * @return
+     * @return password the generated password
      */
     public static String generatePassword(String username, String f_name, String l_name) {
 
@@ -40,15 +44,22 @@ public class Generator {
         // This is the String we'll return.
         String password;
 
-        /*
-         * We loop 8 times for each random character.
-         * First, we select a random list to pick from using SecureRandom.
-         * Then, we generate a random index and concatenate the character
-         * at the index to the final password.
+        /* We loop 4 times for a random character from each
+         * array. Then, we generate a random index and add
+         * the character at the index to the final password.
          */
-        for (int i = 0; i < 8; i++) {
-            int current = random_int.nextInt(characters.length);//rand int 0-3
-            int index = random_int.nextInt(characters[current].length);//rand int 0-whatever list
+        for (int i = 0; i < 4; i++) {
+            int index = random_int.nextInt(characters[i].length);
+            pass[i] =  characters[i][index];
+        }
+
+        // Join the arrays to select 4 more characters.
+        allChars = joinArrays(UPPERCASE, LOWERCASE, NUMBERS, SYMBOLS);
+
+        // Select 4 more characters at random.
+        for (int i = 4; i < 8; i++) {
+            int current = random_int.nextInt(characters.length);
+            int index = random_int.nextInt(characters[current].length);
             pass[i] =  characters[current][index];
         }
 
@@ -64,5 +75,39 @@ public class Generator {
         password = pass.toString();
         return password;
 
+    }
+
+    /**
+     * This class concatenates our character arrays.
+     * @param first the first array
+     * @param second the second array
+     * @param third the third array
+     * @param fourth the fourth array
+     * @return joined the joined arrays
+     */
+    public static char[] joinArrays(char[] first, char[] second,
+                                        char[] third, char[] fourth) {
+
+        // Get the lengths of the arrays to join.
+        int first_len = first.length;
+        int second_len = second.length;
+        int third_len = third.length;
+        int fourth_len = fourth.length;
+
+        /* Create an array of the same type and with the combined length
+         * of the input arrays. We assumed they're all of the same type.
+         */
+        @SuppressWarnings("unchecked")
+        char[] joined = (char[]) Array.newInstance(first.getClass().getComponentType(),
+                first_len + second_len + third_len + fourth_len);
+
+        // Copy the arrays into the return array using arraycopy().
+        System.arraycopy(first, 0, joined, 0, first_len);
+        System.arraycopy(second, 0, joined, first_len, second_len);
+        System.arraycopy(third, 0, joined, second_len, third_len);
+        System.arraycopy(fourth, 0, joined, third_len, fourth_len);
+
+        // Return the joined array.
+        return joined;
     }
 }
