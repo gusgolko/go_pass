@@ -122,7 +122,7 @@ public class Generator {
      * @param unshuffled the array to be shuffled
      * @return shuffled the shuffled list
      */
-    public static ArrayList shuffle(char[] unshuffled) {
+    public static ArrayList<Character> shuffle(char[] unshuffled) {
 
         // Create a new ArrayList.
         List<Character> shuffled = new ArrayList<Character>();
@@ -136,7 +136,7 @@ public class Generator {
         Collections.shuffle(shuffled, random_int);
 
         // Return the shuffled list.
-        return (ArrayList) shuffled;
+        return (ArrayList<Character>) shuffled;
     }
 
     /**
