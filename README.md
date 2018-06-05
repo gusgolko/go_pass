@@ -12,6 +12,8 @@ Clone the repo in your home folder:
 $ git clone https://github.com/gusgolko/go_pass.git
 ```
 
+To run the app with _bash_ if you're using Linux:
+
 Navigate to /go_pass/GoPass/ConsoleApp and run run.sh:
 
 ```shell
