@@ -35,11 +35,9 @@ public class Generator {
     /**
      * This class keeps track of the strings to avoid and generates the password.
      * @param username can't be part of the password
-     * @param f_name can't be part of the password either
-     * @param l_name can't be part of the password either
      * @return password the generated password
      */
-    public static String generatePassword(String username, String f_name, String l_name) {
+    public static String generatePassword(String username) {
 
         // This is the character array where we'll store the generated password.
         char[] pass = new char[8];
@@ -74,10 +72,9 @@ public class Generator {
         /* Check if any of the names are contained in the random password
          * to avoid making it vulnerable accidentally.
          */
-        if (shuffled.contains(username) || shuffled.contains(f_name) ||
-                shuffled.contains(l_name)) {
+        if (shuffled.contains(username)) {
             // Recursive call to generate a new random password.
-            password = generatePassword(username, f_name, l_name);
+            password = generatePassword(username);
         }
 
         // Convert the shuffled characters to a string.
