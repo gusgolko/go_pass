@@ -10,6 +10,7 @@ public class Main {
         // Declare variables to be used for storage.
         String username;
         String password;
+        String choice;
         Scanner scanner = new Scanner(System.in);
 
         // Print welcome message and prompt for username.
@@ -33,5 +34,23 @@ public class Main {
 
         // Print the generated password.
         System.out.println("Your password is " + password);
+        System.out.println();
+        
+        // Offer user to generate new password or quit.
+        System.out.print("Generate a new password? (y/n) ");
+        choice = scanner.nextLine();
+        
+        while (choice.equals("y")) {
+        	// Generate the password and store it.
+        	password = generatePassword(username);
+
+        	// Print the generated password.
+        	System.out.println("Your password is " + password);
+        	System.out.println();
+        
+        	// Offer user to generate new password or quit.
+        	System.out.print("Generate a new password? (y/n) ");
+        	choice = scanner.nextLine();
+        }
     }
 }
