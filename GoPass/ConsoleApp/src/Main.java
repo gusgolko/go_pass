@@ -12,8 +12,9 @@ public class Main {
         // Declare variables to be used for storage.
         String username;
         String password;
-        String choice;
         String cp;
+        int choice;
+        boolean go_on = true;
         Scanner scanner = new Scanner(System.in);
 
         // Print welcome message and prompt for username.
@@ -28,7 +29,8 @@ public class Main {
         System.out.println("+ Special symbols");
         System.out.println("+ Different from your username");
         System.out.println();
-        System.out.print("Input your username to get started: ");
+        System.out.println("Input your username to get started");
+        System.out.print("> ");
         username = scanner.nextLine();
         System.out.println();
 
@@ -39,34 +41,38 @@ public class Main {
         System.out.println("Your password is " + password);
         System.out.println();
         
-        // Ask user if they want to copy the password to clipboard.
-        System.out.print("copy? (y/n)");
-        cp = scanner.nextLine();
-        System.out.println();
+        // Enter menu.
+        while (go_on) {
         
-        Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-        StringSelection stuff = new StringSelection(password);
-        c.setContents(stuff, stuff);
-      
-      
-      
-      
-      
-       // Offer user to generate new password or quit.
-        System.out.print("Generate a new password? (y/n) ");
-        choice = scanner.nextLine();
-        
-        while (choice.equals("y")) {
-        	// Generate the password and store it.
-        	password = generatePassword(username);
-
-        	// Print the generated password.
-        	System.out.println("Your password is " + password);
-        	System.out.println();
-        
-        	// Offer user to generate new password or quit.
-        	System.out.print("Generate a new password? (y/n) ");
-        	choice = scanner.nextLine();
-        }
+		    System.out.println("What next?");
+		    System.out.println("[1] Copy to clipboard");
+		    System.out.println("[2] Generate new password");
+		    System.out.println("[0] Exit");
+		    System.out.print("> ");
+		    choice = scanner.nextInt();
+		    System.out.println();
+		    
+		    switch (choice) {
+		    
+		    	case 1:
+		    		// Get clipboard and set contents to password.
+		    		Clipboard cp_brd = Toolkit.getDefaultToolkit().getSystemClipboard();
+       			 	StringSelection str_sel = new StringSelection(password);
+       				cp_brd.setContents(str_sel, str_sel);
+       				break;
+       				
+       			case 2:
+       				// Generate the password and store it.
+        			password = generatePassword(username);
+        			// Print the generated password.
+        			System.out.println("Your password is " + password);
+        			System.out.println();
+        			break;
+        			
+        		default:
+        			// Exit.
+        			go_on = false;
+		    }
+		}
     }
 }
