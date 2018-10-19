@@ -1,6 +1,8 @@
 package src;
 
 import java.util.Scanner;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import static src.Generator.generatePassword;
 
 public class Main {
@@ -11,6 +13,7 @@ public class Main {
         String username;
         String password;
         String choice;
+        String clipboard_cp;
         Scanner scanner = new Scanner(System.in);
 
         // Print welcome message and prompt for username.
@@ -35,8 +38,8 @@ public class Main {
         // Print the generated password.
         System.out.println("Your password is " + password);
         System.out.println();
-        
-        // Offer user to generate new password or quit.
+      
+       // Offer user to generate new password or quit.
         System.out.print("Generate a new password? (y/n) ");
         choice = scanner.nextLine();
         
