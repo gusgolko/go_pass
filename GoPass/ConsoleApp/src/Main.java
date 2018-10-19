@@ -2,7 +2,7 @@ package src;
 
 import java.util.Scanner;
 import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.*;
 import static src.Generator.generatePassword;
 
 public class Main {
@@ -13,7 +13,7 @@ public class Main {
         String username;
         String password;
         String choice;
-        String clipboard_cp;
+        String cp;
         Scanner scanner = new Scanner(System.in);
 
         // Print welcome message and prompt for username.
@@ -38,6 +38,19 @@ public class Main {
         // Print the generated password.
         System.out.println("Your password is " + password);
         System.out.println();
+        
+        // Ask user if they want to copy the password to clipboard.
+        System.out.print("copy? (y/n)");
+        cp = scanner.nextLine();
+        System.out.println();
+        
+        Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection stuff = new StringSelection(password);
+        c.setContents(stuff, stuff);
+      
+      
+      
+      
       
        // Offer user to generate new password or quit.
         System.out.print("Generate a new password? (y/n) ");
