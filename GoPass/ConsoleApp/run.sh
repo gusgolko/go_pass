@@ -2,11 +2,13 @@
 
 #################################
 ## Author: Kosara Golemshinska ##
-##### Modified: 2018-06-05 ######
+##### Modified: 2020-05-11 ######
 #################################
 
-cd ~/go_pass/GoPass/
 
+cd ..
+
+# Make a directory for the bytecode if one doesn't exist.
 if [ ! -d classes ]
 then
 	mkdir classes
@@ -15,8 +17,13 @@ else
 	mkdir classes
 fi
 
-javac -d ~/go_pass/GoPass/classes/ ~/go_pass/GoPass/ConsoleApp/src/*.java
+# Set the path to the bytecode directory.
+START_PATH=$(pwd)
+CLASS_LOC=${START_PATH}/classes/
+cd $CLASS_LOC
 
-cd ~/go_pass/GoPass/classes/
+# Compile the files in the bytecode directory.
+javac -d $CLASS_LOC ${START_PATH}/ConsoleApp/src/*.java
 
+# Run the app.
 java -cp . src/Main
