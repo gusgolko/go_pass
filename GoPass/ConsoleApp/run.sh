@@ -5,6 +5,17 @@
 ##### Modified: 2020-05-11 ######
 #################################
 
+# Check that the script is ran from the correct path.
+echo
+START_PATH=$(pwd)
+START_BASE=$(basename "$START_PATH")
+CHECK_PATH="ConsoleApp"
+if [ "$START_BASE" != "$CHECK_PATH" ]
+then
+	echo "Please run the start script from /ConsoleApp. Exiting..."
+	echo
+	exit 1
+fi
 
 cd ..
 
@@ -18,12 +29,12 @@ else
 fi
 
 # Set the path to the bytecode directory.
-START_PATH=$(pwd)
-CLASS_LOC=${START_PATH}/classes/
+MAIN_PATH=$(pwd)
+CLASS_LOC=${MAIN_PATH}/classes/
 cd $CLASS_LOC
 
 # Compile the files in the bytecode directory.
-javac -d $CLASS_LOC ${START_PATH}/ConsoleApp/src/*.java
+javac -d $CLASS_LOC ${MAIN_PATH}/ConsoleApp/src/*.java
 
 # Run the app.
 java -cp . src/Main
