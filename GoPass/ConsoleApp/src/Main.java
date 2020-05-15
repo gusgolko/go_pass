@@ -8,11 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Declare variables to be used for storage.s
-        String username;
+        // Declare variables to be used for storage.
         String password;
         String cp;
-        int choice;
+        String choice;
         boolean go_on = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -36,7 +35,6 @@ public class Main {
         // Offer the choice to continue or quit.
         System.out.println("Press 1 to get started");
         System.out.print("> ");
-        username = scanner.nextLine();
         System.out.println();
 
         // Generate the password and store it.
@@ -54,12 +52,12 @@ public class Main {
 		    System.out.println("[2] Copy to clipboard");
 		    System.out.println("[0] Exit");
 		    System.out.print("> ");
-		    choice = scanner.nextInt();
+		    choice = scanner.nextLine();
 		    System.out.println();
 
 		    switch (choice) {
 
-                case 1:
+                case "1":
                     // Generate the password and store it.
                     password = genConsole.generatePassword();
                     // Print the generated password.
@@ -67,12 +65,13 @@ public class Main {
                     System.out.println();
                     break;
 
-		        case 2:
+		        case "2":
 		    		// Get clipboard and set contents to password.
 		    		Clipboard cp_brd = Toolkit.getDefaultToolkit().getSystemClipboard();
        			 	StringSelection str_sel = new StringSelection(password);
        				cp_brd.setContents(str_sel, str_sel);
        				System.out.println("Password copied successfully!");
+       				System.out.println();
        				break;
 
         		default:

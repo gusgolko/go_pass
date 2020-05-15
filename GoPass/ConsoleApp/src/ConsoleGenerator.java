@@ -34,7 +34,6 @@ public class ConsoleGenerator implements Generator {
 
     /**
      * This class keeps track of the strings to avoid and generates the password.
-     * @param username can't be part of the password
      * @return password the generated password
      */
     public String generatePassword() {
@@ -68,14 +67,6 @@ public class ConsoleGenerator implements Generator {
 
         // Shuffle the array and convert it to an ArrayList.
         shuffled = shuffle(pass);
-
-        /* Check if any of the names are contained in the random password
-         * to avoid making it vulnerable accidentally.
-         */
-       /* if (shuffled.contains(username)) {
-            // Recursive call to generate a new random password.
-            password = generatePassword(username);
-        }*/
 
         // Convert the shuffled characters to a string.
         password = arrListToString(shuffled);
