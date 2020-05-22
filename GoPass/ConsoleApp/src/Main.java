@@ -2,7 +2,8 @@ package src;
 
 import java.util.Scanner;
 import java.awt.Toolkit;
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Clipboard;
 
 public class Main {
 
@@ -10,14 +11,13 @@ public class Main {
 
         // Declare variables to be used for storage.
         String password;
-        String cp;
         String choice;
         boolean go_on = true;
         Scanner scanner = new Scanner(System.in);
 
         // Create a generator factory and a console generator.
-        GeneratorFactory generatorFactory = new GeneratorFactory();
-        Generator genConsole = generatorFactory.getGenerator("console");
+        GeneratorFacade generatorFacade = new GeneratorFacade();
+        generatorFacade.genPw();
 
         // Print welcome message.
         System.out.println();
@@ -38,7 +38,7 @@ public class Main {
         System.out.println();
 
         // Generate the password and store it.
-        password = genConsole.generatePassword();
+        password = generatorFacade.genPw();
 
         // Print the generated password.
         System.out.println("Your password is " + password);
@@ -59,7 +59,7 @@ public class Main {
 
                 case "1":
                     // Generate the password and store it.
-                    password = genConsole.generatePassword();
+                    password = generatorFacade.genPw();
                     // Print the generated password.
                     System.out.println("Your password is " + password);
                     System.out.println();
@@ -67,8 +67,8 @@ public class Main {
 
 		        case "2":
 		    		// Get clipboard and set contents to password.
+		        	StringSelection str_sel = new StringSelection(password);
 		    		Clipboard cp_brd = Toolkit.getDefaultToolkit().getSystemClipboard();
-       			 	StringSelection str_sel = new StringSelection(password);
        				cp_brd.setContents(str_sel, str_sel);
        				System.out.println("Password copied successfully!");
        				System.out.println();
@@ -77,6 +77,7 @@ public class Main {
         		default:
         			// Exit.
         			go_on = false;
+        			scanner.close();
 		    }
 		}
     }
