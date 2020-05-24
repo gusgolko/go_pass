@@ -1,10 +1,7 @@
 package src;
 
-import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * This class contains the logic for the strong password generation.
@@ -50,26 +47,26 @@ public class Generator {
          * the character at the index to the final password.
          */
         for (int i = 0; i < 4; i++) {
-            int index = random_int.nextInt(characters[i].length);
+            int index = getRandom_int().nextInt(characters[i].length);
             pass[i] =  characters[i][index];
         }
 
         // Join the arrays to select 4 more characters by joining them 2 by 2.
-        letters = joinArrays(UPPERCASE, LOWERCASE);
-        symbols = joinArrays(NUMBERS, SYMBOLS);
-        allChars = joinArrays(letters, symbols);
+        letters = PasswordBuilder.joinArrays(UPPERCASE, LOWERCASE);
+        symbols = PasswordBuilder.joinArrays(NUMBERS, SYMBOLS);
+        allChars = PasswordBuilder.joinArrays(letters, symbols);
 
         // Select 4 more characters at random.
         for (int i = 4; i < 8; i++) {
-            int index = random_int.nextInt(allChars.length);
+            int index = getRandom_int().nextInt(allChars.length);
             pass[i] =  allChars[index];
         }
 
         // Shuffle the array and convert it to an ArrayList.
-        shuffled = shuffle(pass);
+        shuffled = PasswordBuilder.shuffle(pass);
 
         // Convert the shuffled characters to a string.
-        password = arrListToString(shuffled);
+        password = PasswordBuilder.arrListToString(shuffled);
 
         // Return the password.
         return password;
@@ -77,78 +74,19 @@ public class Generator {
     }
 
     /**
-     * This class concatenates our character arrays.
-     * @param first the first array
-     * @param second the second array
-     * @return joined the joined arrays
+     * Getter method for the SecureRandom number generator.
+     * @return the number generator
      */
-    public static char[] joinArrays(char[] first, char[] second) {
+	public static SecureRandom getRandom_int() {
+		return random_int;
+	}
 
-        // Get the lengths of the arrays to join.
-        int first_len = first.length;
-        int second_len = second.length;
-
-        /* Create an array of the same type and with the combined length
-         * of the input arrays. We assumed they're all of the same type.
-         */
-        char[] joined = (char[]) Array.newInstance(first.getClass().getComponentType(),
-                first_len + second_len);
-
-        // Copy the arrays into the return array using arraycopy().
-        System.arraycopy(first, 0, joined, 0, first_len);
-        System.arraycopy(second, 0, joined, first_len, second_len);
-
-        // Return the joined array.
-        return joined;
-
-
-    }
-
-    /**
-     * This method takes a character array and returns a shuffled ArrayList.
-     * @param unshuffled the array to be shuffled
-     * @return shuffled the shuffled list
-     */
-    public static ArrayList<Character> shuffle(char[] unshuffled) {
-
-        // Create a new ArrayList.
-        List<Character> shuffled = new ArrayList<Character>();
-
-        // Add the characters to the ArrayList.
-        for (char c : unshuffled) {
-            shuffled.add(c);
-        }
-
-        // Shuffle the ArrayList using the SecureRandom seed.
-        Collections.shuffle(shuffled, random_int);
-
-        // Return the shuffled list.
-        return (ArrayList<Character>) shuffled;
-    }
-
-    /**
-     * This method takes in a character ArrayList and converts it
-     * to a string.
-     * @param inputArrList character ArrayList to convert to string
-     * @return resulting_string the resulting string
-     */
-    public static String arrListToString(ArrayList<Character> inputArrList) {
-
-        // This is where we'll store our return string.
-        String resulting_string;
-
-        // New StringBuilder we'll use to convert the ArrayList to a string.
-        StringBuilder builder = new StringBuilder(inputArrList.size());
-
-        // Append all the shuffled characters
-        for(Character c : inputArrList) {
-            builder.append(c);
-        }
-
-        // Convert the result to string.
-        resulting_string = builder.toString();
-
-        // Return the result.
-        return resulting_string;
-    }
+	/**
+	 * Setter method for the SecureRandom number generator.
+	 * @param random_int
+	 */
+	public static void setRandom_int(SecureRandom random_int) {
+		Generator.random_int = random_int;
+	}
+    
 }
