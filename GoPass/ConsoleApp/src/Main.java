@@ -20,17 +20,7 @@ public class Main {
         generatorFacade.genPw();
 
         // Print welcome message.
-        System.out.println();
-        System.out.println("**************************************");
-        System.out.println("********* Welcome to GoPass! *********");
-        System.out.println("**************************************");
-        System.out.println();
-        System.out.println("GoPass generates strong passwords so you don't have to!");
-        System.out.println("+ 8 characters in length");
-        System.out.println("+ Mixed case");
-        System.out.println("+ Alphanumeric");
-        System.out.println("+ Special symbols");
-        System.out.println();
+        Welcome.printMessage();
 
         // Offer the choice to continue or quit.
         System.out.println("Press 1 to get started");
@@ -78,6 +68,7 @@ public class Main {
         			// Exit.
         			go_on = false;
         			scanner.close();
+        			
 		    }
 		}
     }
