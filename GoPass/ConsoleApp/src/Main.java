@@ -1,9 +1,9 @@
 package src;
 
-import java.util.Scanner;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.util.Scanner;
 
 public class Main {
 
@@ -21,11 +21,6 @@ public class Main {
 
         // Print welcome message.
         Welcome.printMessage();
-
-        // Offer the choice to continue or quit.
-        System.out.println("Press 1 to get started");
-        System.out.print("> ");
-        System.out.println();
 
         // Generate the password and store it.
         password = generatorFacade.genPw();
