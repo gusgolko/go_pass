@@ -2,8 +2,6 @@
 
 GoPass is a Java commandline app that generates strong passwords.
 
-**Note:** GoPass GUI coming soon!
-
 ### Get started
 
 Clone the repo:
