@@ -2,6 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>11</java.version>
   </properties>
   <groupId>go_pass</groupId>
   <artifactId>go_pass</artifactId>
@@ -23,7 +24,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>11</release>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
     </plugins>
