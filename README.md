@@ -2,6 +2,10 @@
 
 GoPass is a Java commandline app that generates strong passwords.
 
+### Current status on branch master
+
+![Java CI with Maven](https://github.com/kosara-g/go_pass/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+
 ### Get started
 
 Clone the repo:
